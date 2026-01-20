@@ -1,0 +1,32 @@
+docker pull postgres:18.1
+
+docker images
+
+
+docker run --name container-postgres \
+	--restart=always \
+	-e POSTGRES_PASSWORD=mimi45Wh**xaxalala \
+	-e POSTGRES_USER=halosh \
+	-p 5028:5432 \
+	-d postgres:18.1
+	
+Давайте глянемо, що в докер контенері, бо volume не працює. Помилка шляху.
+docker exec -it <container_name_or_id> bash
+
+docker run --name container-postgres \
+	--restart=always \
+	-e POSTGRES_PASSWORD=mimi45Wh**xaxalala \
+	-e POSTGRES_USER=halosh \
+	-p 5028:5432 \
+	-v /data/postgresql/data:/var/lib/postgresql \
+	-d postgres:18.1
+	
+docker run --name container-postgres --restart=always -e POSTGRES_PASSWORD=mimi45Wh**xaxalala -e POSTGRES_USER=halosh -p 5028:5432 -v D:/volumes/p32/postgres:/var/lib/postgresql -d postgres:18.1
+
+docker ps
+docker ps -a
+
+docker stop container-postgres
+docker rm container-postgres
+
+docker rmi postgres
