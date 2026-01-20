@@ -54,7 +54,7 @@ docker rm container-postgres
 docker images
 docker pull novakvova/tranfer-api
 docker images
-docker run -d --restart=always --name -v /data/tansfer-api:/app/images tranfer-api_container -p 5898:8080 novakvova/tranfer-api
+docker run -d --restart=always -v /data/tansfer-api:/app/images --name tranfer-api_container -p 5898:8080 novakvova/tranfer-api
 docker ps -a
 ```
 
