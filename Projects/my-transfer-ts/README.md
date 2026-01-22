@@ -1,4 +1,33 @@
-# React + TypeScript + Vite
+# Build and Run and push Docker hub 
+```
+docker images
+
+docker build -t malvina-front .
+docker login
+
+docker images
+
+docker tag malvina-front:latest novakvova/malvina-front:latest
+docker images
+
+docker push novakvova/malvina-front:latest
+
+docker rmi novakvova/malvina-front:latest
+docker rmi malvina-front
+
+docker ps -a
+docker stop 
+docker rm
+```
+
+#Pull and Run project nginx with Docker Hub
+```
+docker images
+docker pull novakvova/malvina-front
+docker images
+docker run -d --restart=always --name malvina-front_container -p 5898:8080 novakvova/malvina-front
+docker ps -a
+```
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
