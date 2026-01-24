@@ -26,7 +26,7 @@ docker images
 docker pull novakvova/malvina-front
 docker images
 docker run -d --restart=always --name malvina-front_container -p 6000:80 malvina-front
-docker run -d --restart=always --name malvina-front_container -p 6000:80 novakvova/malvina-front
+docker run -d --restart=always --name malvina-front_container -p 3987:80 novakvova/malvina-front
 docker ps -a
 ```
 
