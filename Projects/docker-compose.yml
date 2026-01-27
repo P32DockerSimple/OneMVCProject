@@ -1,14 +1,14 @@
 version: "3.9"
 
 networks:
-  transfer_net:
+  transferNet:
     driver: bridge
 
 services:
   postgresServerDb:
     image: postgres:17
     container_name: postgres_db
-    restart: restart
+    restart: always
     ports:
       - "5022:5432"
     environment:
@@ -18,22 +18,22 @@ services:
     volumes:
       - /data/transfer/postgres:/var/lib/postgresql/data
     networks:
-      - transfer_net
+      - transferNet
     
-  server:
+  api:
     build: ./WebApiTransfer
     container_name: transfer_api
     volumes:
       - /data/transfer/images:/app/images
     environment:
       ASPNETCORE_ENVIRONMENT: Production
-      ConnectionStrings__DefaultConnection: Host=172.25.120.137;Database=mydb;Port=5022;Username=ivan;Password=marko123halosh
+      ConnectionStrings__DefaultConnection: Host=postgresServerDb;Database=mydb;Port=5022;Username=ivan;Password=marko123halosh
     ports:
       - "5898:8080"
     depends_on:
       - postgresServerDb
     networks:
-      - transfer_net
+      - transferNet
 
   front:
     build: 
