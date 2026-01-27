@@ -5,7 +5,7 @@ networks:
     driver: bridge
 
 services:
-  db:
+  postgresServerDb:
     image: postgres:17
     container_name: postgres_db
     restart: always
@@ -27,11 +27,11 @@ services:
       - /data/transfer/images:/app/images
     environment:
       ASPNETCORE_ENVIRONMENT: Production
-      ConnectionStrings__DefaultConnection: Host=db;Database=mydb;Port=5022;Username=ivan;Password=marko123halosh
+      ConnectionStrings__DefaultConnection: Host=postgresServerDb;Database=mydb;Port=5022;Username=ivan;Password=marko123halosh
     ports:
       - "5898:8080"
     depends_on:
-      - db
+      - postgresServerDb
     networks:
       - transfer_net
 
@@ -39,9 +39,5 @@ services:
     build: 
       context: ./my-transfer-ts
     container_name: react_front
-    depends_on:
-      - server
     ports:
       - "3987:80"
-    networks:
-      - transfer_net
