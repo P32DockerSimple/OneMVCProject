@@ -17,16 +17,12 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - /data/transfer/postgres:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ivan -d mydb"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     networks:
       - transferNet
     
   api:
-    build: ./WebApiTransfer
+    #build: ./WebApiTransfer
+    image: novakvova/transfer-api:latest
     container_name: transfer_api
     volumes:
       - /data/transfer/images:/app/images
@@ -36,14 +32,14 @@ services:
     ports:
       - "5898:8080"
     depends_on:
-      postgresServerDb:
-        condition: service_healthy
+      - postgresServerDb
     networks:
       - transferNet
 
   front:
-    build: 
-      context: ./my-transfer-ts
+    image: novakvova/transfer-react:latest
+    #build: 
+    #  context: ./my-transfer-ts
     container_name: react_front
     ports:
       - "3987:80"
