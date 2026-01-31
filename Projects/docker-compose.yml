@@ -6,7 +6,7 @@ networks:
 
 services:
   postgresServerDb:
-    image: postgres:17
+    image: postgres:18.1
     container_name: postgres_db
     restart: always
     ports:
@@ -16,7 +16,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - /data/transfer/postgres:/var/lib/postgresql/data
+      - ${VOLUME_POSTGRES}
     networks:
       - transferNet
     
@@ -25,10 +25,10 @@ services:
     image: novakvova/transfer-api:latest
     container_name: transfer_api
     volumes:
-      - /data/transfer/images:/app/images
+      - ${VOLUME_SERVERAPI}
     environment:
       ASPNETCORE_ENVIRONMENT: Production
-      ConnectionStrings__DefaultConnection: Host=172.25.120.137;Database=mydb;Port=5022;Username=ivan;Password=marko123halosh
+      ConnectionStrings__DefaultConnection: Host=postgresServerDb;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
     ports:
       - "5898:8080"
     depends_on:

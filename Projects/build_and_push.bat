@@ -2,7 +2,7 @@
 
 REM ==== WEB ====
 cd my-transfer-ts
-docker build -t transfer-react .
+docker build -t transfer-react --build-arg VITE_API_BASE_URL=http://172.25.120.137:5898 .
 docker tag transfer-react:latest novakvova/transfer-react:latest
 docker push novakvova/transfer-react:latest
 
