@@ -25,3 +25,16 @@ chmod +x build_and_push.sh
 docker compose pull
 docker compose up -d
 ```
+
+# my-domains
+```
+server ip - 63.177.248.142
+transferapi - server - 127.0.0.1:5898
+transfer - front - 127.0.0.1:3987
+
+transfer.itstep.click
+
+transferapi.itstep.click
+``` 
+
+# Option dns in server AWS
